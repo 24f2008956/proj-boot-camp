@@ -1,0 +1,15 @@
+{% extends "start.html" %}
+{% block content %}
+  <form method="GET" action="{{ url_for('admin_search') }}">
+    <label for="filter_by">Search by:</label>
+    <select name="filter_by" id="filter_by">
+        <option value="lot_number">Lot Number</option>
+        <option value="user_id">User ID</option>
+        <option value="location">Location</option>
+    </select>
+
+    <input type="text" name="query" placeholder="Enter search term">
+    <button type="submit">Search</button>
+</form>
+  <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+{% endblock %}

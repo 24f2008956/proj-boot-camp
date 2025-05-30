@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacate Vehicle</title>
+</head>
+<body>
+    <h1>Vacate Vehicle</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="vehicle_no" class="form-label">Vehicle No</label>
+            <input type="text" class="form-control" id="vehicle_no" name="vehicle_no" value="{{ vehicle_no }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="parking_lot_id" class="form-label">Parking Lot</label>
+            <input type="text" class="form-control" id="parking_lot_id" name="parking_lot_id" value="{{ parking_lot.prime_location }}" readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">Vacate</button>
+    </form>
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    
+</body>
+</html>

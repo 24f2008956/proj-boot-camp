@@ -1,0 +1,40 @@
+{% extends 'user_dashboard.html' %}
+{% block title %}
+    User History
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>User History</h1>
+        <p>Welcome, {{ user.username }}!</p>
+
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script>
+            window.onload = function () {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    theme: "light2",
+                    animationEnabled: true,
+                    title: {
+                        text: "User History"
+                    },
+                    axisY: {
+                        title: "Value"
+                    },
+                    data: [{
+                        type: "column",
+                        dataPoints: [
+                            { label: "January", y: 10 },
+                            { label: "February", y: 15 },
+                            { label: "March", y: 25 },
+                            { label: "April", y: 30 },
+                            { label: "May", y: 28 }
+                        ]
+                    }]
+                });
+                chart.render();
+            }
+        </script>
+    </div>
+{% endblock %}

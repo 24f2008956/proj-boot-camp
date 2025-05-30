@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking a  Parking Spot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h1>Reserve Parking Spot</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="parking_lot_id" class="form-label">Parking Lot</label>
+            <input type="text" class="form-control" id="parking_lot_id" name="parking_lot_id" value="{{ parking_lot.name }}" readonly>
+        </div>
+        <!--Spot selection code-->
+        <div class="mb-3">
+            <label for="spot_id" class="form-label">Select Spot ID</label>
+            <select class="form-select" id="spot_id" name="spot_id">
+                {% for spot in parking_lot.spots %}
+                    <option value="{{ spot.id }}">{{ spot.id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="vehicle_id" class="form-label">Vehicle NO</label>
+            <input type="text" class="form-control" id="vehicle_id" name="vehicle_id" placeholder="Enter your vehicle number" required>
+        </div>
+        <!--in-Time-->
+        <div class="mb-3">
+            <label for="in_time" class="form-label">In Time</label>
+            <input type="datetime-local" class="form-control" id="in_time" name="in_time" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Reserve</button>
+    </form>
+</body>
+</html>

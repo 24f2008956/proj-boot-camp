@@ -1,0 +1,32 @@
+{% extends 'user_dashboard.html' %}
+{% block content %}
+<form method="GET" action="{{ url_for('search') }}">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="query" placeholder="Search by location" aria-label="Search by location">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+</form>
+<div class="container">
+    <h3>Search Results</h3>
+    {% if results %}
+        <ul class="list-group">
+            {% for result in results %}
+                <li class="list-group-item">
+                    <strong>Parking Lot ID:</strong> {{ result.id }}<br>
+                    <strong>Location:</strong> {{ result.prime_location }}<br>
+                    <strong>Capacity:</strong> {{ result.max_no_spots }}<br>
+                    <strong>Available Spaces:</strong> {{ result.available_spaces }}<br>
+                    <strong>Price per Hour:</strong> {{ result.price_per_hour }}<br>        
+            {% for result in results %}
+                    <a href="{{ url_for('booking', lot_id=result.id) }}" class="btn btn-success btn-sm">Reserve</a>
+                    <a href="{{ url_for('release', lot_id=result.id) }}" class="btn btn-warning btn-sm">Vacate</a>
+                </li>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+    {% else %}
+      <p>No results found for "{{ query }}".</p>
+    {% endif %}
+</div>
+{% endblock %}
+</div>

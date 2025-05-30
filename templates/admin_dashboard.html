@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+<body>
+    {% block content %}
+    
+    
+    <h1>Welcome Admin</h1>
+    <!--Nav bar-->   
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('view_users') }}">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin_charts') }}">Summary</a>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin_search') }}">Search</a>
+           
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+    </ul>
+    <div class="container">
+     Here you can manage users and view statistics.</p>
+        <h3>Statistics</h3>
+        <ul>
+            <li>Total Users: {{ total_users }}</li>
+            <li>Total Parking Lots: {{ total_parking_lots }}</li>
+           
+        </ul>
+        <box><centre><h3> Parking Lots</h3></centre></box>
+        
+        {% for lot in parking_lots %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Parking Lot ID: {{ lot.id }}</h5>
+                <p class="card-text">Name: {{ lot.name }}</p>
+                <p class="card-text">Location: {{ lot.prime_location }}</p>
+                <p class="card-text">Capacity: {{ lot.max_no_spots }}</p>
+                <p class="card-text">Available Spaces: {{ lot.available_spaces }}</p>
+                <p class="card-text">Price per Hour: {{ lot.price_per_hour }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('edit_parking_lot', parking_lot_id=lot.id) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ url_for('delete_parking_lot', parking_lot_id=lot.id) }}" class="btn btn-danger">Delete</a>
+            </div>    
+        </div>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addParkingLotModal">
+        <a href="{{ url_for('create_parking_lot') }}" style="color: white; text-decoration: none;">
+            
+         Add Parking Lot
+        </a>
+    </button>
+    <div class="modal fade" id="addParkingLotModal" tabindex="-1" role="dialog" aria-labelledby="addParkingLotModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addParkingLotModalLabel">Add Parking Lot</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock content %}
+
+</body>
+</html>   

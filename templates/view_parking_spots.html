@@ -1,0 +1,41 @@
+{% extends "base.html" %}{# This template extends the base template and displays available parking spots #}
+
+{% block content %}
+<h1>Available Parking Spots</h1>   
+<table>
+    <thead>
+        <tr>
+            <th>Spot ID</th>
+            <th>Location</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lot in parking_lots %}
+        <tr>
+            <td colspan="3">Parking Lot ID: {{ lot.id }}</td>
+        </tr>
+        {% set parking_spots = lot.parking_spots %}
+        {% if parking_spots %}
+        <tr>
+            <td colspan="3">Parking Lot ID: {{ lot.id }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No parking spots available in this lot.</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+  
+    
+        {% for spot in parking_spots %}
+        <tr>
+            <td>{{ spot.id }}</td>
+            <td>{{ spot.location }}</td>
+            <td>{{ spot.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
